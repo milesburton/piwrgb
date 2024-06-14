@@ -11,10 +11,10 @@ pixels = neopixel.NeoPixel(board.D12, numPixels)
 def flash_led(color, times=5, interval=0.5):
     """Flash the given LED a number of times with a specified interval."""
     for _ in range(times):
-        for pixel in range(len(numPixels)):
+        for pixel in range(numPixels):
             pixels[pixel] = color
         time.sleep(interval)  # Corrected indent for sleep
-        for pixel in range(len(numPixels)):
+        for pixel in range(numPixels):
             pixels[pixel] = (0, 0, 0)
         time.sleep(interval)  # Added sleep after turning off the LEDs
 
