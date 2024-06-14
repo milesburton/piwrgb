@@ -6,9 +6,9 @@ import board
 import neopixel
 
 numPixels = 32
-pixels = neopixel.NeoPixel(board.D12, numPixels)
+pixels = neopixel.NeoPixel(board.D12, numPixels, auto_write=False)
 
- fade_leds(start_color, end_color, steps=50, interval=0.01):
+def fade_leds(start_color, end_color, steps=50, interval=0.01):
     """Fade LEDs from start_color to end_color."""
     for step in range(steps):
         r = start_color[0] + (end_color[0] - start_color[0]) * step / steps
@@ -24,9 +24,8 @@ def flash_led(start_color, end_color, times=5, fade_steps=50, interval=0.02):
     for _ in range(times):
         fade_leds(start_color, end_color, steps=fade_steps, interval=interval)
         time.sleep(interval)
-        fade_leds(start_color, end_color, steps=fade_steps, interval=interval)
+        fade_leds(end_color, start_color, steps=fade_steps, interval=interval)
         time.sleep(interval)
-    return color
 
 def number_to_color(number):
     """Convert a number between 0 and 254 to an RGB color."""
@@ -47,7 +46,7 @@ if __name__ == "__main__":
     try:
         number = int(sys.argv[2])
         start_color = number_to_color(number)
-        flash_led((0,0,0), start_color)
+        flash_led((0, 0, 0), start_color)
     except ValueError as e:
         print(f"Invalid parameter: {e}")
         sys.exit(1)
