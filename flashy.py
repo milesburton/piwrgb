@@ -36,6 +36,11 @@ def number_to_color(number):
     green = (number & 0x1C) >> 2  # Extract green component (3 bits)
     blue = number & 0x03  # Extract blue component (2 bits)
 
+    # Scale to 0-150 range
+    red = int((red / 7.0) * 150)
+    green = int((green / 7.0) * 150)
+    blue = int((blue / 3.0) * 150)
+
     return (red * 32, green * 32, blue * 85)  # Scale to 0-255 range
 
 if __name__ == "__main__":
