@@ -8,7 +8,7 @@ import neopixel
 numPixels = 32
 pixels = neopixel.NeoPixel(board.D12, numPixels)
 
-def fade_leds(start_color, end_color, steps=50, interval=0.02):
+def fade_leds(start_color, end_color, steps=50, interval=0.002):
     """Fade LEDs from start_color to end_color."""
     for step in range(steps):
         r = start_color[0] + (end_color[0] - start_color[0]) * step / steps
