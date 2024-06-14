@@ -20,3 +20,10 @@ Experimentation only
 
  git clone https://github.com/milesburton/piwrgb
 ```
+
+
+# crontab install
+```
+* * * * * ~/piwrgb/update_and_restart.sh >> ~/piwrgb/update_and_restart.log 2>&1
+* * * * * ~/piwrgb/run.sh >> ~/piwrgb/run.log 2>&1  
+```

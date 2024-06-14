@@ -4,15 +4,21 @@ import time
 import sys
 import board
 import neopixel
-pixels = neopixel.NeoPixel(board.D12, 32)
+numPixels = 32
+pixels = neopixel.NeoPixel(board.D12, numPixels)
 
 def flash_led(color, times=5, interval=0.5):
         """Flash the given LED a number of times with a specified interval."""
         for _ in range(times):
-                pixels[0] = color
-                time.sleep(interval)
-                pixels[0] = (0, 0, 0)
-                time.sleep(interval)
+            for pixel in range(0, len(numPixels)):
+                pixels[pixel] = color
+
+        time.sleep(interval)
+
+            for pixel in range(0, len(numPixels)):
+                pixels[pixel] = (0, 0, 0)
+
+        time.sleep(interval)
 
 def number_to_color(number):
         """Convert a number between 0 and 254 to an RGB color."""
