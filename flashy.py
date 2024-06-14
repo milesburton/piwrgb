@@ -41,7 +41,7 @@ def number_to_color(number):
     green = int((green / 7.0) * 150)
     blue = int((blue / 3.0) * 150)
 
-    return (red * 32, green * 32, blue * 85)  # Scale to 0-255 range
+    return (red, green, blue)  # Scale to 0-255 range
 
 if __name__ == "__main__":
     if len(sys.argv) != 3 or sys.argv[1] != 'flash':
