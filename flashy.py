@@ -4,21 +4,19 @@ import time
 import sys
 import board
 import neopixel
+
 numPixels = 32
 pixels = neopixel.NeoPixel(board.D12, numPixels)
 
 def flash_led(color, times=5, interval=0.5):
     """Flash the given LED a number of times with a specified interval."""
     for _ in range(times):
-        for pixel in range(0, len(numPixels)):
+        for pixel in range(len(numPixels)):
             pixels[pixel] = color
-
-    time.sleep(interval)
-
-        for pixel in range(0, len(numPixels)):
+        time.sleep(interval)  # Corrected indent for sleep
+        for pixel in range(len(numPixels)):
             pixels[pixel] = (0, 0, 0)
-
-    time.sleep(interval)
+        time.sleep(interval)  # Added sleep after turning off the LEDs
 
 def number_to_color(number):
     """Convert a number between 0 and 254 to an RGB color."""
@@ -29,7 +27,7 @@ def number_to_color(number):
     green = (number & 0x1C) >> 2  # Extract green component (3 bits)
     blue = number & 0x03  # Extract blue component (2 bits)
 
-    return (red, green, blue)
+    return (red * 32, green * 32, blue * 85)  # Scale to 0-255 range
 
 if __name__ == "__main__":
     if len(sys.argv) != 3 or sys.argv[1] != 'flash':
@@ -43,3 +41,4 @@ if __name__ == "__main__":
     except ValueError as e:
         print(f"Invalid parameter: {e}")
         sys.exit(1)
+
